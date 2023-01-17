@@ -49,6 +49,24 @@ This command will add Gapps, Magisk and Libndk to the ReDroid image at the same 
 python redroid.py -a 11.0.0 -gmn
 ```
 
+Then start the docker container.
+
+```bash
+docker run -itd --rm --privileged \
+    -v ~/data:/data \
+    -p 5555:5555 \
+    redroid/redroid:11.0.0-gapps-ndk-magisk \
+ro.product.cpu.abilist=x86_64,arm64-v8a,x86,armeabi-v7a,armeabi \
+    ro.product.cpu.abilist64=x86_64,arm64-v8a \
+    ro.product.cpu.abilist32=x86,armeabi-v7a,armeabi \
+    ro.dalvik.vm.isa.arm=x86 \
+    ro.dalvik.vm.isa.arm64=x86_64 \
+    ro.enable.native.bridge.exec=1 \
+    ro.dalvik.vm.native.bridge=libndk_translation.so \
+    ro.ndk_translation.version=0.2.2 \
+```
+
+
 ## Troubleshooting
 
 - Magisk installed: N/A
@@ -75,6 +93,8 @@ python redroid.py -a 11.0.0 -gmn
 
 
 ## Credits
-1. [waydroid_script](https://github.com/casualsnek/waydroid_script)
-2. [Magisk Delta](https://huskydg.github.io/magisk-files/)
-3. [vendor_intel_proprietary_houdini](https://github.com/supremegamers/vendor_intel_proprietary_houdini)
+1. [remote-android](https://github.com/remote-android)
+2. [waydroid_script](https://github.com/casualsnek/waydroid_script)
+3. [Magisk Delta](https://huskydg.github.io/magisk-files/)
+4. [vendor_intel_proprietary_houdini](https://github.com/supremegamers/vendor_intel_proprietary_houdini)
+

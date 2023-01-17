@@ -76,7 +76,7 @@ def main():
         f.write(dockerfile)
     client = docker.DockerClient(base_url='unix://var/run/docker.sock')
     new_image_name = "redroid/redroid:"+"-".join(tags)
-    client.images.build(path="/home/rikka/redroid-script",
+    client.images.build(path=".",
                         dockerfile="Dockerfile",
                         tag=new_image_name)
     helper.print_color("Successfully built {}".format(new_image_name), helper.bcolors.GREEN)

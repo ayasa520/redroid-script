@@ -15,7 +15,7 @@ class Gapps(General):
     dl_link = dl_links[arch[0]][0]
     dl_file_name = os.path.join(download_loc, "open_gapps.zip")
     act_md5 = dl_links[arch[0]][1]
-    sys_image_mount = "./gapps"
+    copy_dir = "./gapps"
     extract_to = "/tmp/ogapps/extract"
     non_apks = [
         "defaultetc-common.tar.lz",
@@ -49,11 +49,11 @@ class Gapps(General):
                     app_priv = os.listdir(os.path.join(self.extract_to, "appunpack", app_name, "nodpi"))[0]
                     app_src_dir = os.path.join(self.extract_to, "appunpack", app_name, xx_dpi, app_priv)
                     for app in os.listdir(app_src_dir):
-                        shutil.copytree(os.path.join(app_src_dir, app), os.path.join(self.sys_image_mount, "system", "priv-app", app), dirs_exist_ok=True)
+                        shutil.copytree(os.path.join(app_src_dir, app), os.path.join(self.copy_dir, "system", "priv-app", app), dirs_exist_ok=True)
                 else:
                     print("    Processing extra package : "+os.path.join(self.extract_to, "Core", lz_file))
                     run(["tar", "--lzip", "-xvf", os.path.join(self.extract_to, "Core", lz_file), "-C", os.path.join(self.extract_to, "appunpack")])
                     app_name = os.listdir(os.path.join(self.extract_to, "appunpack"))[0]
                     common_content_dirs = os.listdir(os.path.join(self.extract_to, "appunpack", app_name, "common"))
                     for ccdir in common_content_dirs:
-                        shutil.copytree(os.path.join(self.extract_to, "appunpack", app_name, "common", ccdir), os.path.join(self.sys_image_mount, "system", ccdir), dirs_exist_ok=True)
+                        shutil.copytree(os.path.join(self.extract_to, "appunpack", app_name, "common", ccdir), os.path.join(self.copy_dir, "system", ccdir), dirs_exist_ok=True)

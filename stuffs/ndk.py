@@ -5,7 +5,7 @@ from tools.helper import bcolors, get_download_dir, print_color, run
 
 class Ndk(General):
     download_loc = get_download_dir()
-    sys_image_mount = "./ndk"
+    copy_dir = "./ndk"
     dl_link = "https://www.dropbox.com/s/eaf4dj3novwiccp/libndk_translation_Module-c6077f3398172c64f55aad7aab0e55fad9110cf3.zip?dl=1"
     dl_file_name = os.path.join(download_loc, "libndktranslation.zip")
     extract_to = "/tmp/libndkunpack"
@@ -30,9 +30,9 @@ on property:ro.enable.native.bridge.exec=1
         run(["chmod", "+x", self.extract_to, "-R"])
     
         print_color("Copying libndk library files ...", bcolors.GREEN)
-        shutil.copytree(os.path.join(self.extract_to, "libndk_translation_Module-c6077f3398172c64f55aad7aab0e55fad9110cf3", "system"), os.path.join(self.sys_image_mount, "system"), dirs_exist_ok=True)
+        shutil.copytree(os.path.join(self.extract_to, "libndk_translation_Module-c6077f3398172c64f55aad7aab0e55fad9110cf3", "system"), os.path.join(self.copy_dir, "system"), dirs_exist_ok=True)
 
-        init_path = os.path.join(self.sys_image_mount, "system", "etc", "init", "libndk.rc")
+        init_path = os.path.join(self.copy_dir, "system", "etc", "init", "libndk.rc")
         if not os.path.isfile(init_path):
             os.makedirs(os.path.dirname(init_path), exist_ok=True)
         with open(init_path, "w") as initfile:

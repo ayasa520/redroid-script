@@ -10,8 +10,8 @@ class Magisk(General):
     dl_link = "https://huskydg.github.io/magisk-files/app-release.apk"
     dl_file_name = os.path.join(download_loc, "magisk.apk")
     extract_to = "/tmp/magisk_unpack"
-    sys_overlay_dir = "./magisk"
-    magisk_dir = os.path.join(sys_overlay_dir, "system", "etc", "init", "magisk")
+    copy_dir = "./magisk"
+    magisk_dir = os.path.join(copy_dir, "system", "etc", "init", "magisk")
     machine = host()
     oringinal_bootanim = """
 service bootanim /system/bin/bootanimation
@@ -71,8 +71,8 @@ on property:init.svc.zygote=stopped
         if not os.path.exists(self.magisk_dir):
             os.makedirs(self.magisk_dir, exist_ok=True)
 
-        if not os.path.exists(os.path.join(self.sys_overlay_dir, "sbin")):
-            os.makedirs(os.path.join(self.sys_overlay_dir, "sbin"), exist_ok=True)
+        if not os.path.exists(os.path.join(self.copy_dir, "sbin")):
+            os.makedirs(os.path.join(self.copy_dir, "sbin"), exist_ok=True)
 
         print_color("Copying magisk libs now ...", bcolors.GREEN)
         
@@ -88,7 +88,7 @@ on property:init.svc.zygote=stopped
 
         # Updating Magisk from Magisk manager will modify bootanim.rc, 
         # So it is necessary to backup the original bootanim.rc.
-        bootanim_path = os.path.join(self.sys_overlay_dir, "system", "etc", "init", "bootanim.rc")
+        bootanim_path = os.path.join(self.copy_dir, "system", "etc", "init", "bootanim.rc")
         gz_filename = os.path.join(bootanim_path)+".gz"
         with gzip.open(gz_filename,'wb') as f_gz:
             f_gz.write(self.oringinal_bootanim.encode('utf-8'))

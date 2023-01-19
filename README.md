@@ -85,7 +85,7 @@ ro.product.cpu.abilist=x86_64,arm64-v8a,x86,armeabi-v7a,armeabi \
 
 - libndk doesn't work
     
-    I only made it work on `redroid/redroid:11.0.0`. Also, turning on Zygisk seems to break libndk.
+    I only made it work on `redroid/redroid:11.0.0`. Also, turning on Zygisk seems to break libndk for 32 bit apps, but arm64 apps still work.
     
 - libhoudini doesn't work
     

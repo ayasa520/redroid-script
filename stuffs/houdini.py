@@ -8,6 +8,16 @@ from tools.helper import bcolors, get_download_dir, print_color, run
 class Houdini(General):
     download_loc = get_download_dir()
     copy_dir = "./houdini"
+    init_rc_component = """
+on early-init
+    mount -t binfmt_misc binfmt_misc /proc/sys/fs/binfmt_misc
+
+on property:ro.enable.native.bridge.exec=1
+    exec -- /system/bin/sh -c "echo ':arm_exe:M::\\\\x7f\\\\x45\\\\x4c\\\\x46\\\\x01\\\\x01\\\\x01\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x02\\\\x00\\\\x28::/system/bin/houdini:P' > /proc/sys/fs/binfmt_misc/register"
+    exec -- /system/bin/sh -c "echo ':arm_dyn:M::\\\\x7f\\\\x45\\\\x4c\\\\x46\\\\x01\\\\x01\\\\x01\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x03\\\\x00\\\\x28::/system/bin/houdini:P' >> /proc/sys/fs/binfmt_misc/register"
+    exec -- /system/bin/sh -c "echo ':arm64_exe:M::\\\\x7f\\\\x45\\\\x4c\\\\x46\\\\x02\\\\x01\\\\x01\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x02\\\\x00\\\\xb7::/system/bin/houdini64:P' >> /proc/sys/fs/binfmt_misc/register"
+    exec -- /system/bin/sh -c "echo ':arm64_dyn:M::\\\\x7f\\\\x45\\\\x4c\\\\x46\\\\x02\\\\x01\\\\x01\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x03\\\\x00\\\\xb7::/system/bin/houdini64:P' >> /proc/sys/fs/binfmt_misc/register"
+"""
     dl_links = {
         "11.0.0": [
             "https://github.com/supremegamers/vendor_intel_proprietary_houdini/archive/81f2a51ef539a35aead396ab7fce2adf89f46e88.zip",
@@ -44,7 +54,7 @@ class Houdini(General):
         print_color("Copying libhoudini library files ...", bcolors.GREEN)
         name = re.findall("([a-zA-Z0-9]+)\.zip", self.dl_link)[0]
         shutil.copytree(os.path.join(self.extract_to, "vendor_intel_proprietary_houdini-" + name,
-                        "prebuilts"), os.path.join(self.copy_dir, "vendor"), dirs_exist_ok=True)
+                        "prebuilts"), os.path.join(self.copy_dir, "system"), dirs_exist_ok=True)
 
         init_path = os.path.join(self.copy_dir, "system", "etc", "init", "houdini.rc")
         if not os.path.isfile(init_path):

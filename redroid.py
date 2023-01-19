@@ -31,7 +31,7 @@ def main():
                         help='Install Magisk ( Bootless )',
                         action='store_true')
     # Not working
-    # parser.add_argument('-h', '--install-libhoudini', dest='houdini',
+    # parser.add_argument('-l', '--install-libhoudini', dest='houdini',
     #                     help='Install libhoudini for arm translation',
     #                     action='store_true')
     # Not working
@@ -59,11 +59,12 @@ def main():
         else:
             helper.print_color(
                 "WARNING: Libndk seems to work only on redroid:11.0.0", helper.bcolors.YELLOW)
-    # if args.houdini and not args.installndk:
-        # arch = helper.host()[0]
-        # if arch == "x86" or arch == "x86_64":
-        #     Houdini(args.android).install()
-        #     dockerfile = dockerfile+"COPY houdini /\n"
+    # if args.houdini and not args.ndk:
+    #     arch = helper.host()[0]
+    #     if arch == "x86" or arch == "x86_64":
+    #         tags.append("houdini")
+    #         Houdini(args.android).install()
+    #         dockerfile = dockerfile+"COPY houdini /\n"
     if args.magisk:
         Magisk().install()
         dockerfile = dockerfile+"COPY magisk /\n"

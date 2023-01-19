@@ -34,20 +34,12 @@ on post-fs-data
     mkdir /sbin/.magisk/block 700
     copy /system/etc/init/magisk/config /sbin/.magisk/config
     rm /dev/.magisk_unblock
-    start 7zKkuZ1ZhD
+    exec u:r:su:s0 root root -- /sbin/magisk --auto-selinux --post-fs-data
     wait /dev/.magisk_unblock 40
     rm /dev/.magisk_unblock
 
-service 7zKkuZ1ZhD /sbin/magisk --auto-selinux --post-fs-data
-    user root
-    seclabel u:r:su:s0
-    oneshot
-
-service wHgGlkRCtMoIQw /sbin/magisk --auto-selinux --service
-    class late_start
-    user root
-    seclabel u:r:su:s0
-    oneshot
+on zygote-start
+    exec u:r:su:s0 root root -- /sbin/magisk --auto-selinux --service
 
 on property:sys.boot_completed=1
     mkdir /data/adb/magisk 755

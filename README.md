@@ -1,6 +1,7 @@
 # Remote-Android Script
 
 This script adds Gapps, Magisk and libndk to redroid **without recompiling the entire image**
+If you have problems with this script, you should **create an issue**.
 
 ## Specify an Android version
 
@@ -41,12 +42,22 @@ Zygisk and modules like LSPosed should work.
 python redroid.py -m
 ```
 
+## Add widevine DRM(L3) to ReDroid image
+
+![](assets/4.png)
+
+```
+python redroid.py -w
+```
+
+
+
 ## Example
 
-This command will add Gapps, Magisk and Libndk to the ReDroid image at the same time.
+This command will add Gapps, Magisk, Libndk, Widevine to the ReDroid image at the same time.
 
 ```bash
-python redroid.py -a 11.0.0 -gmn
+python redroid.py -a 11.0.0 -gmnw
 ```
 
 Then start the docker container.
@@ -55,7 +66,7 @@ Then start the docker container.
 docker run -itd --rm --privileged \
     -v ~/data:/data \
     -p 5555:5555 \
-    redroid/redroid:11.0.0-gapps-ndk-magisk \
+    redroid/redroid:11.0.0-gapps-ndk-magisk-widevine \
 ro.product.cpu.abilist=x86_64,arm64-v8a,x86,armeabi-v7a,armeabi \
     ro.product.cpu.abilist64=x86_64,arm64-v8a \
     ro.product.cpu.abilist32=x86,armeabi-v7a,armeabi \
@@ -84,11 +95,11 @@ ro.product.cpu.abilist=x86_64,arm64-v8a,x86,armeabi-v7a,armeabi \
     2. Grab device id and register on this website: https://www.google.com/android/uncertified/
 
 - libndk doesn't work
-    
+  
     I only made it work on `redroid/redroid:11.0.0`. Also, turning on Zygisk seems to break libndk for 32 bit apps, but arm64 apps still work.
     
 - libhoudini doesn't work
-    
+  
     I have no idea. I can't get any version of libhoudini to work on redroid.
 
 

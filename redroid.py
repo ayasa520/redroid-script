@@ -34,10 +34,9 @@ def main():
     # parser.add_argument('-l', '--install-libhoudini', dest='houdini',
     #                     help='Install libhoudini for arm translation',
     #                     action='store_true')
-    # Not working
-    # parser.add_argument('-w', '--install-widevine', dest='widevine',
-    #                     help='Integrate Widevine DRM (L3)',
-    #                     action='store_true')
+    parser.add_argument('-w', '--install-widevine', dest='widevine',
+                        help='Integrate Widevine DRM (L3)',
+                        action='store_true')
 
     args = parser.parse_args()
     dockerfile = dockerfile + \
@@ -69,9 +68,10 @@ def main():
         Magisk().install()
         dockerfile = dockerfile+"COPY magisk /\n"
         tags.append("magisk")
-    # if args.widevine:
-    #     Widevine().install()
-    #     dockerfile = dockerfile+"COPY widevine /\n"
+    if args.widevine:
+        Widevine(args.android).install()
+        dockerfile = dockerfile+"COPY widevine /\n"
+        tags.append("widevine")
     print("\nDockerfile\n"+dockerfile)
     with open("./Dockerfile", "w") as f:
         f.write(dockerfile)

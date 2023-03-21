@@ -60,6 +60,8 @@ on property:init.svc.zygote=stopped
         download_file(self.dl_link, self.dl_file_name)    
 
     def copy(self):
+        if os.path.exists(self.copy_dir):
+            shutil.rmtree(self.copy_dir)
         if not os.path.exists(self.magisk_dir):
             os.makedirs(self.magisk_dir, exist_ok=True)
 

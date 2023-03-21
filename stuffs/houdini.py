@@ -49,6 +49,8 @@ on property:ro.enable.native.bridge.exec=1
         super().download()
 
     def copy(self):
+        if os.path.exists(self.copy_dir):
+            shutil.rmtree(self.copy_dir)
         run(["chmod", "+x", self.extract_to, "-R"])
 
         print_color("Copying libhoudini library files ...", bcolors.GREEN)

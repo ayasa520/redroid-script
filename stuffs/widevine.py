@@ -46,8 +46,8 @@ class Widevine(General):
         super().download()
 
     def copy(self):
-        if os.path.exists("./widevine"):
-            shutil.rmtree("./widevine")
+        if os.path.exists(self.copy_dir):
+            shutil.rmtree(self.copy_dir)
         run(["chmod", "+x", self.extract_to, "-R"])
         print_color("Copying widevine library files ...", bcolors.GREEN)
         name = re.findall("([a-zA-Z0-9]+)\.zip", self.dl_link)[0]

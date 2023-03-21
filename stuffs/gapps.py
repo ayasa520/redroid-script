@@ -32,6 +32,8 @@ class Gapps(General):
         super().download()
 
     def copy(self):
+        if os.path.exists(self.copy_dir):
+            shutil.rmtree(self.copy_dir)
         if not os.path.exists(self.extract_to):
             os.makedirs(self.extract_to)
         if not os.path.exists(os.path.join(self.extract_to, "appunpack")):

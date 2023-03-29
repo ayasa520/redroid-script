@@ -18,7 +18,7 @@ def main():
                         dest='android',
                         help='Specify the Android version to build',
                         default='11.0.0',
-                        choices=['13.0.0', '12.0.0', '11.0.0', '10.0.0', '9.0.0', '8.1.0'])
+                        choices=['13.0.0', '12.0.0', '12.0.0_64only', '11.0.0', '10.0.0', '9.0.0', '8.1.0'])
     parser.add_argument('-g', '--install-gapps',
                         dest='gapps',
                         help='Install OpenGapps to ReDroid',

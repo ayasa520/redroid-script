@@ -1,7 +1,10 @@
 # Remote-Android Script
 
 This script adds Gapps, Magisk and libndk to redroid **without recompiling the entire image**
-If you have problems with this script, you should **create an issue**.
+If redroid-script doesn't work, please create an issue
+
+## Dependencies
+- lzip
 
 ## Specify an Android version
 

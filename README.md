@@ -18,7 +18,7 @@ option:
 
 ## Specify an Android version
 
-Use `-a` or `--android-version` to specify the Android version of the image being pulled. The value can be `8.1.0`, `9.0.0`, `10.0.0`, `11.0.0`, `12.0.0` or `13.0.0`. The default is 11.0.0.
+Use `-a` or `--android-version` to specify the Android version of the image being pulled. The value can be `8.1.0`, `9.0.0`, `10.0.0`, `11.0.0`, `12.0.0`, `12.0.0_64only` or `13.0.0`. The default is 11.0.0.
 
 ```bash
 # pull the latest image
@@ -90,6 +90,20 @@ ro.product.cpu.abilist=x86_64,arm64-v8a,x86,armeabi-v7a,armeabi \
     ro.ndk_translation.version=0.2.2 \
 ```
 
+If you need to use libndk on `redroid:12.0.0_64only` image, you should start the container with the following command
+
+```bash
+docker run -itd --rm --privileged \
+    -v ~/data12:/data \
+    -p 5555:5555 \
+    redroid/redroid:12.0.0_64only-ndk \
+    androidboot.use_memfd=1 \
+    ro.product.cpu.abilist=x86_64,arm64-v8a \
+    ro.product.cpu.abilist64=x86_64,arm64-v8a \
+    ro.dalvik.vm.isa.arm64=x86_64 \
+    ro.enable.native.bridge.exec=1 \
+    ro.dalvik.vm.native.bridge=libndk_translation.so
+```
 
 ## Troubleshooting
 

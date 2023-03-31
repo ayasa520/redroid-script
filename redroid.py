@@ -49,7 +49,7 @@ def main():
         tags.append("gapps")
     # if args.ndk and not args.houdini:
     if args.ndk:
-        if args.android == "11.0.0":
+        if args.android in ["11.0.0", "12.0.0", "12.0.0_64only"]:
             arch = helper.host()[0]
             if arch == "x86" or arch == "x86_64":
                 Ndk().install()
@@ -57,7 +57,7 @@ def main():
                 tags.append("ndk")
         else:
             helper.print_color(
-                "WARNING: Libndk seems to work only on redroid:11.0.0", helper.bcolors.YELLOW)
+                "WARNING: Libndk seems to work only on redroid:11.0.0 or redroid:12.0.0", helper.bcolors.YELLOW)
     # if args.houdini and not args.ndk:
     #     arch = helper.host()[0]
     #     if arch == "x86" or arch == "x86_64":

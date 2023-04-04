@@ -6,6 +6,16 @@ If redroid-script doesn't work, please create an issue
 ## Dependencies
 - lzip
 
+## Specify container type
+
+Specify container type. Default is docker
+
+option:
+```
+ -c {docker,podman}, --container {docker,podman}
+```
+
+
 ## Specify an Android version
 
 Use `-a` or `--android-version` to specify the Android version of the image being pulled. The value can be `8.1.0`, `9.0.0`, `10.0.0`, `11.0.0`, `12.0.0` or `13.0.0`. The default is 11.0.0.

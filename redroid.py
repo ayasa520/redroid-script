@@ -1,12 +1,12 @@
-from io import BytesIO
+#!/usr/bin/env python3
+
 import argparse
 from stuffs.gapps import Gapps
-from stuffs.houdini import Houdini
 from stuffs.magisk import Magisk
 from stuffs.ndk import Ndk
 from stuffs.widevine import Widevine
 import tools.helper as helper
-import docker
+import subprocess
 
 
 def main():
@@ -30,13 +30,14 @@ def main():
     parser.add_argument('-m', '--install-magisk', dest='magisk',
                         help='Install Magisk ( Bootless )',
                         action='store_true')
-    # Not working
-    # parser.add_argument('-l', '--install-libhoudini', dest='houdini',
-    #                     help='Install libhoudini for arm translation',
-    #                     action='store_true')
     parser.add_argument('-w', '--install-widevine', dest='widevine',
                         help='Integrate Widevine DRM (L3)',
                         action='store_true')
+    parser.add_argument('-c', '--container', 
+                        dest='container',
+                        default='docker',
+                        help='Specify container type', 
+                        choices=['docker', 'podman'])
 
     args = parser.parse_args()
     dockerfile = dockerfile + \
@@ -47,7 +48,6 @@ def main():
         Gapps().install()
         dockerfile = dockerfile + "COPY gapps /\n"
         tags.append("gapps")
-    # if args.ndk and not args.houdini:
     if args.ndk:
         if args.android in ["11.0.0", "12.0.0", "12.0.0_64only"]:
             arch = helper.host()[0]
@@ -58,12 +58,6 @@ def main():
         else:
             helper.print_color(
                 "WARNING: Libndk seems to work only on redroid:11.0.0 or redroid:12.0.0", helper.bcolors.YELLOW)
-    # if args.houdini and not args.ndk:
-    #     arch = helper.host()[0]
-    #     if arch == "x86" or arch == "x86_64":
-    #         tags.append("houdini")
-    #         Houdini(args.android).install()
-    #         dockerfile = dockerfile+"COPY houdini /\n"
     if args.magisk:
         Magisk().install()
         dockerfile = dockerfile+"COPY magisk /\n"
@@ -75,12 +69,11 @@ def main():
     print("\nDockerfile\n"+dockerfile)
     with open("./Dockerfile", "w") as f:
         f.write(dockerfile)
-    client = docker.DockerClient(base_url='unix://var/run/docker.sock')
-    new_image_name = "redroid/redroid:"+"-".join(tags)
-    client.images.build(path=".",
-                        dockerfile="Dockerfile",
-                        tag=new_image_name)
-    helper.print_color("Successfully built {}".format(new_image_name), helper.bcolors.GREEN)
+    new_image_name = "redroid/redroid:"+"_".join(tags)
+    subprocess.run([args.container, "build", "-t", new_image_name, "."])
+    helper.print_color("Successfully built {}".format(
+        new_image_name), helper.bcolors.GREEN)
+
 
 if __name__ == "__main__":
     main()

@@ -59,3 +59,7 @@ class Widevine(General):
                        os.path.join(self.copy_dir, "vendor", "lib", "libprotobuf-cpp-lite.so"))
             os.symlink("./libprotobuf-cpp-lite-3.9.1.so", os.path.join(self.copy_dir,
                        "vendor", "lib64", "libprotobuf-cpp-lite.so"))
+
+        for file in os.listdir(os.path.join(self.copy_dir, "vendor", "etc", "init")):
+            if file.endswith('.rc'):
+                os.chmod(os.path.join(self.copy_dir, "vendor", "etc", "init", file), 0o644)

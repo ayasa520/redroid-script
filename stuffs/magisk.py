@@ -89,7 +89,4 @@ on property:init.svc.zygote=stopped
         with open(bootanim_path, "w") as initfile:
             initfile.write(self.oringinal_bootanim+self.bootanim_component)
 
-
-
-  
-
+        os.chmod(bootanim_path, 0o644)

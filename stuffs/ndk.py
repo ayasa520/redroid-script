@@ -34,7 +34,8 @@ class Ndk(General):
         print_color("Copying libndk library files ...", bcolors.GREEN)
         shutil.copytree(os.path.join(self.extract_to, "vendor_google_proprietary_ndk_translation-prebuilt-181d9290a69309511185c4417ba3d890b3caaaa8", "prebuilts"), os.path.join(self.copy_dir, "system"), dirs_exist_ok=True)
 
-        # init_path = os.path.join(self.copy_dir, "system", "etc", "init", "libndk.rc")
+        init_path = os.path.join(self.copy_dir, "system", "etc", "init", "ndk_translation.rc")
+        os.chmod(init_path, 0o644)
         # if not os.path.isfile(init_path):
         #     os.makedirs(os.path.dirname(init_path), exist_ok=True)
         # with open(init_path, "w") as initfile:

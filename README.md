@@ -74,13 +74,13 @@ python redroid.py -a 11.0.0 -gmnw
 ```
 
 Then start the docker container.
-
+containerid = docker 953431bf816f
 ```bash
 docker run -itd --rm --privileged \
     -v ~/data:/data \
     -p 5555:5555 \
-    redroid/redroid:11.0.0-gapps-ndk-magisk-widevine \
-ro.product.cpu.abilist=x86_64,arm64-v8a,x86,armeabi-v7a,armeabi \
+    redroid/redroid:13.0.0-gapps-ndk-magisk-widevine \
+    ro.product.cpu.abilist=x86_64,arm64-v8a,x86,armeabi-v7a,armeabi \
     ro.product.cpu.abilist64=x86_64,arm64-v8a \
     ro.product.cpu.abilist32=x86,armeabi-v7a,armeabi \
     ro.dalvik.vm.isa.arm=x86 \

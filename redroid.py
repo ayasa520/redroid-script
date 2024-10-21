@@ -2,6 +2,7 @@
 
 import argparse
 from stuffs.gapps import Gapps
+from stuffs.litegapps import LiteGapps
 from stuffs.magisk import Magisk
 from stuffs.ndk import Ndk
 from stuffs.widevine import Widevine
@@ -22,6 +23,10 @@ def main():
     parser.add_argument('-g', '--install-gapps',
                         dest='gapps',
                         help='Install OpenGapps to ReDroid',
+                        action='store_true')
+    parser.add_argument('-lg', '--install-litegapps',
+                        dest='litegapps',
+                        help='Install LiteGapps to ReDroid',
                         action='store_true')
     parser.add_argument('-n', '--install-ndk-translation',
                         dest='ndk',
@@ -48,6 +53,10 @@ def main():
         Gapps().install()
         dockerfile = dockerfile + "COPY gapps /\n"
         tags.append("gapps")
+    if args.litegapps:
+        LiteGapps(args.android).install()
+        dockerfile = dockerfile + "COPY litegapps /\n"
+        tags.append("litegapps")
     if args.ndk:
         if args.android in ["11.0.0", "12.0.0", "12.0.0_64only"]:
             arch = helper.host()[0]

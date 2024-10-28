@@ -45,9 +45,12 @@ def main():
             args.android)
     tags.append(args.android)
     if args.gapps:
-        Gapps().install()
-        dockerfile = dockerfile + "COPY gapps /\n"
-        tags.append("gapps")
+        if args.android in ["11.0.0"]:
+            Gapps().install()
+            dockerfile = dockerfile + "COPY gapps /\n"
+            tags.append("gapps")
+        else:
+            helper.print_color( "WARNING: OpenGapps only supports 11.0.0", helper.bcolors.YELLOW)
     if args.ndk:
         if args.android in ["11.0.0", "12.0.0", "12.0.0_64only"]:
             arch = helper.host()[0]

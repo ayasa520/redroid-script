@@ -13,7 +13,7 @@ class General:
             with open(self.dl_file_name,"rb") as f:
                 bytes = f.read()
                 loc_md5 = hashlib.md5(bytes).hexdigest()
-        while not os.path.isfile(self.dl_file_name) or loc_md5 != self.act_md5:
+        while not os.path.isfile(self.dl_file_name) or (self.act_md5 != "" and loc_md5 != self.act_md5):
             if os.path.isfile(self.dl_file_name):
                 os.remove(self.dl_file_name)
                 print_color("md5 mismatches, redownloading now ....",bcolors.YELLOW)

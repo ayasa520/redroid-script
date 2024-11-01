@@ -50,9 +50,9 @@ def host():
     mapping = {
         "i686": ("x86", 32),
         "x86_64": ("x86_64", 64),
-        "aarch64": ("arm64-v8a", 64),
-        "armv7l": ("armeabi-v7a", 32),
-        "armv8l": ("armeabi-v7a", 32)
+        "aarch64": ("arm64", 64),
+        "armv7l": ("arm", 32),
+        "armv8l": ("arm", 32)
     }
     if machine in mapping:
         # if mapping[machine] == "x86_64":

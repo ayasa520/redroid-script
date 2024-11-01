@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
 import argparse
-from stuffs.gapps import Gapps
-from stuffs.litegapps import LiteGapps
-from stuffs.magisk import Magisk
-from stuffs.ndk import Ndk
-from stuffs.widevine import Widevine
+from stuff.gapps import Gapps
+from stuff.litegapps import LiteGapps
+from stuff.magisk import Magisk
+from stuff.ndk import Ndk
+from stuff.widevine import Widevine
 import tools.helper as helper
 import subprocess
 

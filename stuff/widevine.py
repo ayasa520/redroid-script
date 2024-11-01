@@ -1,7 +1,7 @@
 import os
 import re
 import shutil
-from stuffs.general import General
+from stuff.general import General
 from tools.helper import bcolors, get_download_dir, host, print_color, run
 
 
@@ -28,12 +28,12 @@ class Widevine(General):
             "13.0.0": ["https://github.com/supremegamers/vendor_google_proprietary_widevine-prebuilt/archive/a8524d608431573ef1c9313822d271f78728f9a6.zip",
                        "5c55df61da5c012b4e43746547ab730f"]
         },
-        # "armeabi-v7a":
+        # "arm":
         # {
         #     "11.0.0": ["https://github.com/supremegamers/vendor_google_proprietary_widevine-prebuilt/archive/7b6e37ef0b63408f7d0232e67192020ba0aa402b.zip",
         #                "3c3a136dc926ae5fc07826359720dbab"]
         # },
-        "arm64-v8a": {
+        "arm64": {
             "11.0.0": ["https://github.com/supremegamers/vendor_google_proprietary_widevine-prebuilt/archive/a1a19361d36311bee042da8cf4ced798d2c76d98.zip",
                        "fed6898b5cfd2a908cb134df97802554"]
         }

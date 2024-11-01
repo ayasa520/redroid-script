@@ -1,7 +1,7 @@
 import os
 import re
 import shutil
-from stuffs.general import General
+from stuff.general import General
 from tools.helper import bcolors, get_download_dir, print_color, run
 
 

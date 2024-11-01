@@ -33,6 +33,12 @@ python redroid.py -a 11.0.0
 python redroid.py -g
 ```
 
+## Add liteGapps to ReDroid image
+
+```bash
+python redroid.py -lg
+```
+
 ## Add libndk arm translation to ReDroid image
 <img src="./assets/2.png" style="zoom:50%;" />
 

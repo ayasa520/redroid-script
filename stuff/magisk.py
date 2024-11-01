@@ -2,7 +2,7 @@ import gzip
 import os
 import shutil
 import re
-from stuffs.general import General
+from stuff.general import General
 from tools.helper import bcolors, download_file, host, print_color, run, get_download_dir
 
 class Magisk(General):
@@ -69,7 +69,13 @@ on property:init.svc.zygote=stopped
 
         print_color("Copying magisk libs now ...", bcolors.GREEN)
         
-        lib_dir = os.path.join(self.extract_to, "lib", self.machine[0])
+        arch_map = {
+            "x86": "x86",
+            "x86_64": "x86_64",
+            "arm": "armeabi-v7a",
+            "arm64": "arm64-v8a"
+        }
+        lib_dir = os.path.join(self.extract_to, "lib", arch_map[self.machine[0]])
         for parent, dirnames, filenames in os.walk(lib_dir):
             for filename in filenames:
                 o_path = os.path.join(lib_dir, filename)  

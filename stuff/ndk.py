@@ -6,10 +6,10 @@ from tools.helper import bcolors, get_download_dir, print_color, run
 class Ndk(General):
     download_loc = get_download_dir()
     copy_dir = "./ndk"
-    dl_link = "https://github.com/supremegamers/vendor_google_proprietary_ndk_translation-prebuilt/archive/181d9290a69309511185c4417ba3d890b3caaaa8.zip"
+    dl_link = "https://github.com/supremegamers/vendor_google_proprietary_ndk_translation-prebuilt/archive/0c6b0aad45498bbdb22eb1311b145d08ff4ce1fc.zip"
     dl_file_name = os.path.join(download_loc, "libndktranslation.zip")
     extract_to = "/tmp/libndkunpack"
-    act_md5 = "0beff55f312492f24d539569d84f5bfb"
+    act_md5 = "6d4b3788ac9e7e953aada561f64a2563"
 #     init_rc_component = """
 # # Enable native bridge for target executables
 # on early-init
@@ -32,7 +32,7 @@ class Ndk(General):
         run(["chmod", "+x", self.extract_to, "-R"])
     
         print_color("Copying libndk library files ...", bcolors.GREEN)
-        shutil.copytree(os.path.join(self.extract_to, "vendor_google_proprietary_ndk_translation-prebuilt-181d9290a69309511185c4417ba3d890b3caaaa8", "prebuilts"), os.path.join(self.copy_dir, "system"), dirs_exist_ok=True)
+        shutil.copytree(os.path.join(self.extract_to, "vendor_google_proprietary_ndk_translation-prebuilt-0c6b0aad45498bbdb22eb1311b145d08ff4ce1fc", "prebuilts"), os.path.join(self.copy_dir, "system"), dirs_exist_ok=True)
 
         init_path = os.path.join(self.copy_dir, "system", "etc", "init", "ndk_translation.rc")
         os.chmod(init_path, 0o644)

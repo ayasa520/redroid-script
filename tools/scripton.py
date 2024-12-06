@@ -16,7 +16,7 @@ def patch_hex(file_path, base_hex, ghidra_offset, hex_to_check, hex_to_write):
         with open(file_path, "r+b") as f:
             f.seek(skip_bytes)
             f.write(hex_to_write.to_bytes(length=num_bytes, byteorder="big"))
-            print("libndk patched")
+            print("binary patched")
     elif check_hex(file_path, skip_bytes, num_bytes, hex_to_write):
         print("Already patched")
     else:

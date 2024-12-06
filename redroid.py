@@ -2,6 +2,7 @@
 
 import argparse
 from stuff.gapps import Gapps
+from stuff.houdini import Houdini
 from stuff.litegapps import LiteGapps
 from stuff.magisk import Magisk
 from stuff.mindthegapps import MindTheGapps
@@ -29,13 +30,17 @@ def main():
                         dest='litegapps',
                         help='Install LiteGapps to ReDroid',
                         action='store_true')
+    parser.add_argument('-mtg', '--install-mindthegapps',
+                        dest='mindthegapps',
+                        help='Install MindTheGapps to ReDroid',
+                        action='store_true')
     parser.add_argument('-n', '--install-ndk-translation',
                         dest='ndk',
                         help='Install libndk translation files',
                         action='store_true')
-    parser.add_argument('-mtg', '--install-mindthegapps',
-                        dest='mindthegapps',
-                        help='Install MindTheGapps to ReDroid',
+    parser.add_argument('-lh', '--install-houdini-translation',
+                        dest='houdini',
+                        help='Install libhoudini translation files',
                         action='store_true')
     parser.add_argument('-m', '--install-magisk', dest='magisk',
                         help='Install Magisk ( Bootless )',
@@ -79,6 +84,12 @@ def main():
         else:
             helper.print_color(
                 "WARNING: Libndk seems to work only on redroid:11.0.0 or redroid:12.0.0", helper.bcolors.YELLOW)
+    if args.houdini:
+        arch = helper.host()[0]
+        if arch == "x86" or arch == "x86_64":
+            Houdini(args.android).install()
+            dockerfile = dockerfile+"COPY houdini /\n"
+            tags.append("houdini")
     if args.magisk:
         Magisk().install()
         dockerfile = dockerfile+"COPY magisk /\n"

@@ -3,6 +3,7 @@ import re
 import shutil
 from stuff.general import General
 from tools.helper import bcolors, get_download_dir, print_color, run
+from tools.scripton import patch_libhoudini
 
 
 class Houdini(General):
@@ -54,7 +55,7 @@ on property:ro.enable.native.bridge.exec=1
         run(["chmod", "+x", self.extract_to, "-R"])
 
         print_color("Copying libhoudini library files ...", bcolors.GREEN)
-        name = re.findall("([a-zA-Z0-9]+)\.zip", self.dl_link)[0]
+        name = re.findall(r"([a-zA-Z0-9]+)\.zip", self.dl_link)[0]
         shutil.copytree(os.path.join(self.extract_to, "vendor_intel_proprietary_houdini-" + name,
                         "prebuilts"), os.path.join(self.copy_dir, "system"), dirs_exist_ok=True)
 
@@ -64,3 +65,4 @@ on property:ro.enable.native.bridge.exec=1
         with open(init_path, "w") as initfile:
             initfile.write(self.init_rc_component)
         os.chmod(init_path, 0o644)
+        patch_libhoudini(os.path.join(self.copy_dir, "system", "lib64", "libhoudini.so", ))

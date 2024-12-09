@@ -10,10 +10,18 @@ class Houdini(General):
     copy_dir = "./houdini"
     init_rc_component = """
 on early-init
-    mount -t binfmt_misc binfmt_misc /proc/sys/fs/binfmt_misc
+    mount binfmt_misc binfmt_misc /proc/sys/fs/binfmt_misc
 
 on property:ro.enable.native.bridge.exec=1
-    exec -- /system/bin/sh -c "echo ':arm_exe:M::\\\\x7f\\\\x45\\\\x4c\\\\x46\\\\x01\\\\x01\\\\x01\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x02\\\\x00\\\\x28::/system/bin/houdini:P' > /proc/sys/fs/binfmt_misc/register"
+    copy /system/etc/binfmt_misc/arm_exe /proc/sys/fs/binfmt_misc/register
+    copy /system/etc/binfmt_misc/arm_dyn /proc/sys/fs/binfmt_misc/register
+
+on property:ro.enable.native.bridge.exec64=1
+    copy /system/etc/binfmt_misc/arm64_exe /proc/sys/fs/binfmt_misc/register
+    copy /system/etc/binfmt_misc/arm64_dyn /proc/sys/fs/binfmt_misc/register
+
+on property:sys.boot_completed=1
+    exec -- /system/bin/sh -c "echo ':arm_exe:M::\\\\x7f\\\\x45\\\\x4c\\\\x46\\\\x01\\\\x01\\\\x01\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x02\\\\x00\\\\x28::/system/bin/houdini:P' >> /proc/sys/fs/binfmt_misc/register"
     exec -- /system/bin/sh -c "echo ':arm_dyn:M::\\\\x7f\\\\x45\\\\x4c\\\\x46\\\\x01\\\\x01\\\\x01\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x03\\\\x00\\\\x28::/system/bin/houdini:P' >> /proc/sys/fs/binfmt_misc/register"
     exec -- /system/bin/sh -c "echo ':arm64_exe:M::\\\\x7f\\\\x45\\\\x4c\\\\x46\\\\x02\\\\x01\\\\x01\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x02\\\\x00\\\\xb7::/system/bin/houdini64:P' >> /proc/sys/fs/binfmt_misc/register"
     exec -- /system/bin/sh -c "echo ':arm64_dyn:M::\\\\x7f\\\\x45\\\\x4c\\\\x46\\\\x02\\\\x01\\\\x01\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x03\\\\x00\\\\xb7::/system/bin/houdini64:P' >> /proc/sys/fs/binfmt_misc/register"
@@ -26,9 +34,14 @@ on property:ro.enable.native.bridge.exec=1
             "https://github.com/supremegamers/vendor_intel_proprietary_houdini/archive/0e0164611d5fe5595229854759c30a9b5c1199a5.zip",
             "9709701b44b6ab7fc311c7dc95945bd0"],
         "13.0.0": [
-            "https://github.com/supremegamers/vendor_intel_proprietary_houdini/archive/978d8cba061a08837b7e520cd03b635af643ba08.zip",
-            "1e139054c05034648fae58a1810573b4"
-        ],
+            "https://github.com/supremegamers/vendor_intel_proprietary_houdini/archive/5460519aa63a23201ba0f3d45cfc382b2e9b30a0.zip",
+            "08d8d8ed9c4b00eba3fa21ecd527eb87"],
+        "14.0.0": [
+            "https://github.com/supremegamers/vendor_intel_proprietary_houdini/archive/01865e24451008840c4b3a72a2fdd0bfd67f7f93.zip",
+            "2b6279b93dbd375f80d79bc95a9e7d85"],
+        "15.0.0": [
+            "https://github.com/supremegamers/vendor_intel_proprietary_houdini/archive/01865e24451008840c4b3a72a2fdd0bfd67f7f93.zip",
+            "2b6279b93dbd375f80d79bc95a9e7d85"]
         # "9.0.0":[],
         # "8.1.0":[]
     }

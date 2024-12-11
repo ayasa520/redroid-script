@@ -33,15 +33,19 @@ on property:sys.boot_completed=1
         "12.0.0": [
             "https://github.com/supremegamers/vendor_intel_proprietary_houdini/archive/0e0164611d5fe5595229854759c30a9b5c1199a5.zip",
             "9709701b44b6ab7fc311c7dc95945bd0"],
+        #  13.0.0 from wsa-13 not working
+        # "13.0.0": [
+        #     "https://github.com/supremegamers/vendor_intel_proprietary_houdini/archive/5460519aa63a23201ba0f3d45cfc382b2e9b30a0.zip",
+        #     "08d8d8ed9c4b00eba3fa21ecd527eb87"],
         "13.0.0": [
-            "https://github.com/supremegamers/vendor_intel_proprietary_houdini/archive/5460519aa63a23201ba0f3d45cfc382b2e9b30a0.zip",
-            "08d8d8ed9c4b00eba3fa21ecd527eb87"],
+            "https://github.com/rote66/vendor_intel_proprietary_houdini/archive/740353bf4391969902bc80ee2a9258db18481b45.zip",
+            "d4824c0c00e8fa9611e1db5124ec61f9"],
         "14.0.0": [
-            "https://github.com/supremegamers/vendor_intel_proprietary_houdini/archive/01865e24451008840c4b3a72a2fdd0bfd67f7f93.zip",
-            "2b6279b93dbd375f80d79bc95a9e7d85"],
-        "15.0.0": [
-            "https://github.com/supremegamers/vendor_intel_proprietary_houdini/archive/01865e24451008840c4b3a72a2fdd0bfd67f7f93.zip",
-            "2b6279b93dbd375f80d79bc95a9e7d85"]
+            "https://github.com/rote66/vendor_intel_proprietary_houdini/archive/740353bf4391969902bc80ee2a9258db18481b45.zip",
+            "d4824c0c00e8fa9611e1db5124ec61f9"]
+        # "15.0.0": [
+        #     "https://github.com/rote66/vendor_intel_proprietary_houdini/archive/740353bf4391969902bc80ee2a9258db18481b45.zip",
+        #     "d4824c0c00e8fa9611e1db5124ec61f9"]
         # "9.0.0":[],
         # "8.1.0":[]
     }

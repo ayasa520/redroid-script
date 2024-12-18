@@ -27,6 +27,16 @@ on property:sys.boot_completed=1
     exec -- /system/bin/sh -c "echo ':arm64_dyn:M::\\\\x7f\\\\x45\\\\x4c\\\\x46\\\\x02\\\\x01\\\\x01\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x00\\\\x03\\\\x00\\\\xb7::/system/bin/houdini64:P' >> /proc/sys/fs/binfmt_misc/register"
 """
     dl_links = {
+        #  8.1.0 from cros R79 Android N not working
+        # "8.1.0":[
+        #     "https://github.com/rote66/vendor_intel_proprietary_houdini/archive/9246014ddf22d5e34f294d726dc48ca446b0e20e.zip",
+        #     "b0a9ddc0d817d290a15b132091a37f36"],
+        "8.1.0":[
+            "https://github.com/rote66/vendor_intel_proprietary_houdini/archive/46682f423b8497db3f96222f2669d770eff764c3.zip",
+            "cd4dd2891aa18e7699d33dcc3fe3ffd4"],
+        "9.0.0":[
+            "https://github.com/rote66/vendor_intel_proprietary_houdini/archive/46682f423b8497db3f96222f2669d770eff764c3.zip",
+            "cd4dd2891aa18e7699d33dcc3fe3ffd4"],
         "11.0.0": [
             "https://github.com/supremegamers/vendor_intel_proprietary_houdini/archive/81f2a51ef539a35aead396ab7fce2adf89f46e88.zip",
             "fbff756612b4144797fbc99eadcb6653"],
@@ -46,8 +56,6 @@ on property:sys.boot_completed=1
         # "15.0.0": [
         #     "https://github.com/rote66/vendor_intel_proprietary_houdini/archive/740353bf4391969902bc80ee2a9258db18481b45.zip",
         #     "d4824c0c00e8fa9611e1db5124ec61f9"]
-        # "9.0.0":[],
-        # "8.1.0":[]
     }
     dl_file_name = os.path.join(download_loc, "libhoudini.zip")
     extract_to = "/tmp/houdiniunpack"

@@ -13,8 +13,8 @@ class Houdini_Hack(General):
 
     def __init__(self, version):
         self.version = version
-        self.dl_link = "https://github.com/rote66/redroid_libhoudini_hack/archive/c48a37c4211ef1fe3d061ef1efeabce57cb15c97.zip"
-        self.act_md5 = "43f93337ca4db49aa23b3e8afe3c68fb"
+        self.dl_link = "https://github.com/rote66/redroid_libhoudini_hack/archive/a2194c5e294cbbfdfe87e51eb9eddb4c3621d8c3.zip"
+        self.act_md5 = "8f71a58f3e54eca879a2f7de64dbed58"
 
     def download(self):
         print_color("Downloading libhoudini_hack now .....", bcolors.GREEN)
@@ -28,5 +28,6 @@ class Houdini_Hack(General):
         shutil.copytree(os.path.join(self.extract_to, "redroid_libhoudini_hack-" + name,
                         self.version), os.path.join(self.copy_dir, "system"), dirs_exist_ok=True)
 
-        init_path = os.path.join(self.copy_dir, "system", "etc", "init", "hw", "init.rc")
-        os.chmod(init_path, 0o644)
+        if not self.version == "9.0.0":
+            init_path = os.path.join(self.copy_dir, "system", "etc", "init", "hw", "init.rc")
+            os.chmod(init_path, 0o644)

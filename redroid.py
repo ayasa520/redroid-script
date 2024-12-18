@@ -86,11 +86,12 @@ def main():
             helper.print_color(
                 "WARNING: Libndk seems to work only on redroid:11.0.0 or redroid:12.0.0", helper.bcolors.YELLOW)
     if args.houdini:
-        if args.android in ["11.0.0", "12.0.0", "13.0.0", "14.0.0", "15.0.0"]:
+        if args.android in ["8.1.0", "9.0.0", "11.0.0", "12.0.0", "13.0.0", "14.0.0"]:
             arch = helper.host()[0]
             if arch == "x86" or arch == "x86_64":
                 Houdini(args.android).install()
-                Houdini_Hack(args.android).install()
+                if not args.android == "8.1.0":
+                    Houdini_Hack(args.android).install()
                 dockerfile = dockerfile+"COPY houdini /\n"
                 tags.append("houdini") 
         else:

@@ -7,9 +7,9 @@ from tools.helper import bcolors, download_file, host, print_color, run, get_dow
 
 class Magisk(General):
     download_loc = get_download_dir()
-    dl_link = "https://web.archive.org/web/20230718224206if_/https://objects.githubusercontent.com/github-production-release-asset-2e65be/514574759/50ec2f91-174b-4918-8587-04e847458bfd?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20230718%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230718T224206Z&X-Amz-Expires=300&X-Amz-Signature=ee54e872b4d3c1388601941e85b2fcf84d5e06968618271ea2f5e3ea5947d4e1&X-Amz-SignedHeaders=host&actor_id=0&key_id=0&repo_id=514574759&response-content-disposition=attachment%3B%20filename%3Dapp-debug.apk&response-content-type=application%2Fvnd.android.package-archive"
+    dl_link = "https://github.com/ayasa520/KitsuneMagisk/releases/download/ea3f64a/app-debug.apk"
     dl_file_name = os.path.join(download_loc, "magisk.apk")
-    act_md5 = "ec98dcee84a47785dc551eb7c465b25f"
+    act_md5 = "36a906be869ff6e877aff8bdc5a405d6"
     extract_to = "/tmp/magisk_unpack"
     copy_dir = "./magisk"
     magisk_dir = os.path.join(copy_dir, "system", "etc", "init", "magisk")
@@ -28,31 +28,26 @@ service bootanim /system/bin/bootanimation
     bootanim_component = """
 on post-fs-data
     start logd
-    exec u:r:su:s0 root root -- /system/etc/init/magisk/magisk{arch} --auto-selinux --setup-sbin /system/etc/init/magisk
-    exec u:r:su:s0 root root -- /system/etc/init/magisk/magiskpolicy --live --magisk "allow * magisk_file lnk_file *"
-    mkdir /sbin/.magisk 700
-    mkdir /sbin/.magisk/mirror 700
-    mkdir /sbin/.magisk/block 700
-    copy /system/etc/init/magisk/config /sbin/.magisk/config
-    rm /dev/.magisk_unblock
-    exec u:r:su:s0 root root -- /sbin/magisk --auto-selinux --post-fs-data
-    wait /dev/.magisk_unblock 40
-    rm /dev/.magisk_unblock
-
-on zygote-start
-    exec u:r:su:s0 root root -- /sbin/magisk --auto-selinux --service
-
+    exec u:r:su:s0 root root -- {MAGISKSYSTEMDIR}/magiskpolicy --live --magisk
+    exec u:r:magisk:s0 root root -- {MAGISKSYSTEMDIR}/magiskpolicy --live --magisk
+    exec u:r:update_engine:s0 root root -- {MAGISKSYSTEMDIR}/magiskpolicy --live --magisk
+    exec u:r:su:s0 root root -- {MAGISKSYSTEMDIR}/{magisk_name} --auto-selinux --setup-sbin {MAGISKSYSTEMDIR} {MAGISKTMP}
+    exec u:r:su:s0 root root -- {MAGISKTMP}/magisk --auto-selinux --post-fs-data
+on nonencrypted
+    exec u:r:su:s0 root root -- {MAGISKTMP}/magisk --auto-selinux --service
+on property:vold.decrypt=trigger_restart_framework
+    exec u:r:su:s0 root root -- {MAGISKTMP}/magisk --auto-selinux --service
 on property:sys.boot_completed=1
     mkdir /data/adb/magisk 755
-    exec u:r:su:s0 root root -- /sbin/magisk --auto-selinux --boot-complete
+    exec u:r:su:s0 root root -- {MAGISKTMP}/magisk --auto-selinux --boot-complete
     exec -- /system/bin/sh -c "if [ ! -e /data/data/io.github.huskydg.magisk ] ; then pm install /system/etc/init/magisk/magisk.apk ; fi"
    
 on property:init.svc.zygote=restarting
-    exec u:r:su:s0 root root -- /sbin/magisk --auto-selinux --zygote-restart
+    exec u:r:su:s0 root root -- {MAGISKTMP}/magisk --auto-selinux --zygote-restart
    
 on property:init.svc.zygote=stopped
-    exec u:r:su:s0 root root -- /sbin/magisk --auto-selinux --zygote-restart
-    """.format(arch=machine[1])
+    exec u:r:su:s0 root root -- {MAGISKTMP}/magisk --auto-selinux --zygote-restart
+    """.format(MAGISKSYSTEMDIR="/system/etc/init/magisk", MAGISKTMP="/sbin", magisk_name=f"magisk{machine[1]}")
 
     def download(self):
         print_color("Downloading latest Magisk-Delta now .....", bcolors.GREEN)

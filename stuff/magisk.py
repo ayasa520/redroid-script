@@ -7,9 +7,9 @@ from tools.helper import bcolors, download_file, host, print_color, run, get_dow
 
 class Magisk(General):
     download_loc = get_download_dir()
-    dl_link = "https://github.com/ayasa520/KitsuneMagisk/releases/download/ea3f64a/app-debug.apk"
+    dl_link = "https://github.com/ayasa520/Magisk/releases/download/debug-7be6d81-30200/Magisk-7be6d81-30200-debug.apk"
     dl_file_name = os.path.join(download_loc, "magisk.apk")
-    act_md5 = "36a906be869ff6e877aff8bdc5a405d6"
+    act_md5 = "834b0f063ea713bea48b92c7d5648ce9"
     extract_to = "/tmp/magisk_unpack"
     copy_dir = "./magisk"
     magisk_dir = os.path.join(copy_dir, "system", "etc", "init", "magisk")
@@ -47,7 +47,7 @@ on property:init.svc.zygote=restarting
    
 on property:init.svc.zygote=stopped
     exec u:r:su:s0 root root -- {MAGISKTMP}/magisk --auto-selinux --zygote-restart
-    """.format(MAGISKSYSTEMDIR="/system/etc/init/magisk", MAGISKTMP="/sbin", magisk_name=f"magisk{machine[1]}")
+    """.format(MAGISKSYSTEMDIR="/system/etc/init/magisk", MAGISKTMP="/sbin", magisk_name="magisk")
 
     def download(self):
         print_color("Downloading latest Magisk-Delta now .....", bcolors.GREEN)

@@ -7,9 +7,9 @@ from tools.helper import bcolors, download_file, host, print_color, run, get_dow
 
 class Magisk(General):
     download_loc = get_download_dir()
-    dl_link = "https://github.com/ayasa520/Magisk/releases/download/debug-7be6d81-30200/Magisk-7be6d81-30200-debug.apk"
+    dl_link = "https://github.com/ayasa520/Magisk/releases/download/canary-30403/app-debug.apk"
     dl_file_name = os.path.join(download_loc, "magisk.apk")
-    act_md5 = "834b0f063ea713bea48b92c7d5648ce9"
+    act_md5 = "3b6f1497ac3be2669724abf902810f5c"
     extract_to = "/tmp/magisk_unpack"
     copy_dir = "./magisk"
     magisk_dir = os.path.join(copy_dir, "system", "etc", "init", "magisk")
@@ -50,7 +50,7 @@ on property:init.svc.zygote=stopped
     """.format(MAGISKSYSTEMDIR="/system/etc/init/magisk", MAGISKTMP="/sbin", magisk_name="magisk")
 
     def download(self):
-        print_color("Downloading latest Magisk-Delta now .....", bcolors.GREEN)
+        print_color("Downloading latest Magisk now .....", bcolors.GREEN)
         super().download()   
 
     def copy(self):

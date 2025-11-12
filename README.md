@@ -147,6 +147,6 @@ docker run -itd --rm --privileged \
 ## Credits
 1. [remote-android](https://github.com/remote-android)
 2. [waydroid_script](https://github.com/casualsnek/waydroid_script)
-3. [Magisk Delta](https://huskydg.github.io/magisk-files/)
+3. ~~[Magisk Delta](https://huskydg.github.io/magisk-files/)~~
 4. [vendor_intel_proprietary_houdini](https://github.com/supremegamers/vendor_intel_proprietary_houdini)
-
+5. [Magisk](https://github.com/topjohnwu/Magisk)

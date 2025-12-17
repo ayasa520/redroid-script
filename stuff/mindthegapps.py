@@ -6,6 +6,20 @@ from tools.helper import get_download_dir, host, print_color, run, bcolors
 
 class MindTheGapps(General):
     dl_links = {
+        "15.0.0": {
+            "x86_64": [
+                "https://github.com/s1204IT/MindTheGappsBuilder/releases/download/20250330/MindTheGapps-15.0.0-x86_64-20250330.zip",
+                "e54694828bd74e9066b2534a9675c31e",
+            ],
+            "arm64": [
+                "https://github.com/s1204IT/MindTheGappsBuilder/releases/download/20250330/MindTheGapps-15.0.0-arm64-20250330.zip",
+                "79acb62f0f7c66b0f0bcadae5624f3d1",
+            ],
+            "arm": [
+                "https://github.com/s1204IT/MindTheGappsBuilder/releases/download/20250330/MindTheGapps-15.0.0-arm-20250330.zip",
+                "4ced6a404a714e61831e16068c3642b3",
+            ],
+        },
         "14.0.0": {
             "x86_64": [
                 "https://github.com/s1204IT/MindTheGappsBuilder/releases/download/20240226/MindTheGapps-14.0.0-x86_64-20240226.zip",

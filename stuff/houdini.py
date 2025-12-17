@@ -38,24 +38,20 @@ on property:sys.boot_completed=1
             "https://github.com/rote66/vendor_intel_proprietary_houdini/archive/46682f423b8497db3f96222f2669d770eff764c3.zip",
             "cd4dd2891aa18e7699d33dcc3fe3ffd4"],
         "11.0.0": [
-            "https://github.com/supremegamers/vendor_intel_proprietary_houdini/archive/81f2a51ef539a35aead396ab7fce2adf89f46e88.zip",
-            "fbff756612b4144797fbc99eadcb6653"],
+            "https://github.com/rote66/vendor_intel_proprietary_houdini/archive/476c66fa32fc9b2f622904fa1f8cf3658e85d938.zip",
+            "339a8cb7f3d8fa5959b2c79bbd858c1b"],
         "12.0.0": [
-            "https://github.com/supremegamers/vendor_intel_proprietary_houdini/archive/0e0164611d5fe5595229854759c30a9b5c1199a5.zip",
-            "9709701b44b6ab7fc311c7dc95945bd0"],
-        #  13.0.0 from wsa-13 not working
-        # "13.0.0": [
-        #     "https://github.com/supremegamers/vendor_intel_proprietary_houdini/archive/5460519aa63a23201ba0f3d45cfc382b2e9b30a0.zip",
-        #     "08d8d8ed9c4b00eba3fa21ecd527eb87"],
+            "https://github.com/rote66/vendor_intel_proprietary_houdini/archive/476c66fa32fc9b2f622904fa1f8cf3658e85d938.zip",
+            "339a8cb7f3d8fa5959b2c79bbd858c1b"],
         "13.0.0": [
-            "https://github.com/rote66/vendor_intel_proprietary_houdini/archive/740353bf4391969902bc80ee2a9258db18481b45.zip",
-            "d4824c0c00e8fa9611e1db5124ec61f9"],
+            "https://github.com/rote66/vendor_intel_proprietary_houdini/archive/476c66fa32fc9b2f622904fa1f8cf3658e85d938.zip",
+            "339a8cb7f3d8fa5959b2c79bbd858c1b"],
         "14.0.0": [
-            "https://github.com/rote66/vendor_intel_proprietary_houdini/archive/740353bf4391969902bc80ee2a9258db18481b45.zip",
-            "d4824c0c00e8fa9611e1db5124ec61f9"]
+            "https://github.com/rote66/vendor_intel_proprietary_houdini/archive/476c66fa32fc9b2f622904fa1f8cf3658e85d938.zip",
+            "339a8cb7f3d8fa5959b2c79bbd858c1b"]
         # "15.0.0": [
-        #     "https://github.com/rote66/vendor_intel_proprietary_houdini/archive/740353bf4391969902bc80ee2a9258db18481b45.zip",
-        #     "d4824c0c00e8fa9611e1db5124ec61f9"]
+            # "https://github.com/rote66/vendor_intel_proprietary_houdini/archive/476c66fa32fc9b2f622904fa1f8cf3658e85d938.zip",
+            # "339a8cb7f3d8fa5959b2c79bbd858c1b"]
     }
     dl_file_name = os.path.join(download_loc, "libhoudini.zip")
     extract_to = "/tmp/houdiniunpack"

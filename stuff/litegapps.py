@@ -36,8 +36,8 @@ class LiteGapps(General):
         },
         "14.0.0": {
             "x86_64": [
-                "https://sourceforge.net/projects/litegapps/files/litegapps/x86_64/34/lite/v3.0/AUTO_LiteGapps_x86_64_14.0_v3.0_official.zip",
-                "51cbdb561f9c9162e4fdcbffe691c4bc",
+                "https://sourceforge.net/projects/litegapps/files/litegapps/x86_64/34/lite/2024-10-29/LiteGapps-x86_64-14.0-20241029-official.zip",
+                "c897c8fe8a37474ed386e1bd73a7995b",
             ],
             "x86": [
                 "https://sourceforge.net/projects/litegapps/files/litegapps/x86/35/lite/2024-10-27/LiteGapps-x86-15.0-20241027-official.zip",

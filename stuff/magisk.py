@@ -7,9 +7,9 @@ from tools.helper import bcolors, download_file, host, print_color, run, get_dow
 
 class Magisk(General):
     download_loc = get_download_dir()
-    dl_link = "https://github.com/ayasa520/Magisk/releases/download/v30.6/app-debug.apk"
+    dl_link = "https://github.com/ayasa520/Magisk/releases/download/v30.7/Magisk-v30.7.apk"
     dl_file_name = os.path.join(download_loc, "magisk.apk")
-    act_md5 = "77ef9f3538c0767ea45ee5c946f84bc6"
+    act_md5 = "0a31050fdcfaa15f47c9dd1eb8d04fc8"
     extract_to = "/tmp/magisk_unpack"
     copy_dir = "./magisk"
     magisk_dir = os.path.join(copy_dir, "system", "etc", "init", "magisk")
@@ -74,7 +74,7 @@ on property:init.svc.zygote=stopped
         for parent, dirnames, filenames in os.walk(lib_dir):
             for filename in filenames:
                 o_path = os.path.join(lib_dir, filename)  
-                filename = re.search('lib(.*)\.so', filename)
+                filename = re.search(r'lib(.*)\.so', filename)
                 n_path = os.path.join(self.magisk_dir, filename.group(1))
                 shutil.copyfile(o_path, n_path)
                 run(["chmod", "+x", n_path])

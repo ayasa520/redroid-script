@@ -73,7 +73,7 @@ def main():
         tags.append("litegapps")
     if args.mindthegapps:
         MindTheGapps(args.android).install()
-        dockerfile = dockerfile + "COPY mindthegapps /\n"
+        dockerfile = dockerfile + "COPY mindthegapps /\nENTRYPOINT [\"/init\", \"androidboot.hardware=redroid\", \"ro.setupwizard.mode=DISABLED\"]\n"
         tags.append("mindthegapps")
     if args.ndk:
         if args.android in ["11.0.0", "12.0.0", "12.0.0_64only"]:

@@ -38,20 +38,20 @@ on property:sys.boot_completed=1
             "https://github.com/rote66/vendor_intel_proprietary_houdini/archive/46682f423b8497db3f96222f2669d770eff764c3.zip",
             "cd4dd2891aa18e7699d33dcc3fe3ffd4"],
         "11.0.0": [
-            "https://github.com/rote66/vendor_intel_proprietary_houdini/archive/debc3dc91cf12b5c5b8a1c546a5b0b7bf7f838a8.zip",
-            "cb7ffac26d47ec7c89df43818e126b47"],
+            "https://github.com/rote66/vendor_intel_proprietary_houdini/archive/0c149b1e14d7bfd4b2af261afc6f2e80517dbd98.zip",
+            "d9703a9b1e674bb41c34e40823774e9f"],
         "12.0.0": [
-            "https://github.com/rote66/vendor_intel_proprietary_houdini/archive/debc3dc91cf12b5c5b8a1c546a5b0b7bf7f838a8.zip",
-            "cb7ffac26d47ec7c89df43818e126b47"],
+            "https://github.com/rote66/vendor_intel_proprietary_houdini/archive/0c149b1e14d7bfd4b2af261afc6f2e80517dbd98.zip",
+            "d9703a9b1e674bb41c34e40823774e9f"],
         "13.0.0": [
-            "https://github.com/rote66/vendor_intel_proprietary_houdini/archive/debc3dc91cf12b5c5b8a1c546a5b0b7bf7f838a8.zip",
-            "cb7ffac26d47ec7c89df43818e126b47"],
+            "https://github.com/rote66/vendor_intel_proprietary_houdini/archive/0c149b1e14d7bfd4b2af261afc6f2e80517dbd98.zip",
+            "d9703a9b1e674bb41c34e40823774e9f"],
         "14.0.0": [
-            "https://github.com/rote66/vendor_intel_proprietary_houdini/archive/debc3dc91cf12b5c5b8a1c546a5b0b7bf7f838a8.zip",
-            "cb7ffac26d47ec7c89df43818e126b47"]
+            "https://github.com/rote66/vendor_intel_proprietary_houdini/archive/0c149b1e14d7bfd4b2af261afc6f2e80517dbd98.zip",
+            "d9703a9b1e674bb41c34e40823774e9f"],
         # "15.0.0": [
-        #     "https://github.com/rote66/vendor_intel_proprietary_houdini/archive/debc3dc91cf12b5c5b8a1c546a5b0b7bf7f838a8.zip",
-        #     "cb7ffac26d47ec7c89df43818e126b47"]
+        #     "https://github.com/rote66/vendor_intel_proprietary_houdini/archive/0c149b1e14d7bfd4b2af261afc6f2e80517dbd98.zip",
+        #     "d9703a9b1e674bb41c34e40823774e9f"]
     }
     dl_file_name = os.path.join(download_loc, "libhoudini.zip")
     extract_to = "/tmp/houdiniunpack"

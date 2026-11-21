@@ -6,6 +6,32 @@ If redroid-script doesn't work, please create an issue
 ## Dependencies
 - lzip
 
+## Host requirements (running the built image)
+
+This script only builds the image. Running the resulting redroid
+container needs a host kernel with the Android binder driver available:
+
+- `binder_linux` must load on the host. Many cloud-server Ubuntu kernels
+  do not ship it by default. On Ubuntu, install the extra modules
+  package for the running kernel first, then load the module:
+
+  ```bash
+  sudo apt-get install -y "linux-modules-extra-$(uname -r)"
+  sudo modprobe binder_linux devices="binder,hwbinder,vndbinder"
+  ```
+
+  If `modprobe` still fails, that kernel was built without binder:
+  switch to the generic Ubuntu kernel or an image with binder support.
+  redroid cannot start without binder. This is a host problem, not an
+  image problem, so rebuilding the image will not fix it.
+- `ashmem_linux` is only needed on older setups. Newer kernels replace
+  it with memfd (`androidboot.use_memfd=1`), so a missing ashmem module
+  alone is not a blocker.
+- On ARM64 hosts, use an ARM64-native or `*_64only` image and skip the
+  x86 translation properties shown in the examples below (libndk /
+  libhoudini and the `ro.product.cpu.abilist` overrides are for running
+  ARM apps on x86 hosts, not the other way round).
+
 ## Specify container type
 
 Specify container type. Default is docker
@@ -143,6 +169,32 @@ docker run -itd --rm --privileged \
   
     I have no idea. I can't get any version of libhoudini to work on redroid.
 
+
+- Container exits immediately / Android never boots on a cloud server
+
+  Check the host before rebuilding anything: `lsmod | grep binder`
+  should list `binder_linux`. See "Host requirements" above. Cloud
+  kernels frequently ship without binder, and the container only shows
+  init failing, which makes it look like an image problem.
+
+- Play Integrity verdicts
+
+  A containerized Android cannot pass DEVICE or STRONG Play Integrity:
+  there is no hardware-backed key attestation inside the container.
+  BASIC may pass depending on the setup. Apps that require DEVICE or
+  STRONG (some banking apps) will refuse to run. This is a platform
+  limitation, not something the Magisk options in this script can fix.
+
+- Exposing ADB on a public server
+
+  The examples publish `-p 5555:5555`, which listens on every
+  interface. On a public cloud instance that gives anyone who finds
+  the port full adb access to the phone. Bind it to localhost instead
+  and reach it through an SSH tunnel or a VPN:
+
+  ```bash
+  -p 127.0.0.1:5555:5555
+  ```
 
 ## Credits
 1. [remote-android](https://github.com/remote-android)

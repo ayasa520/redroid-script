@@ -40,7 +40,7 @@ on property:vold.decrypt=trigger_restart_framework
 on property:sys.boot_completed=1
     mkdir /data/adb/magisk 755
     exec u:r:su:s0 root root -- {MAGISKTMP}/magisk --auto-selinux --boot-complete
-    exec -- /system/bin/sh -c "if [ ! -e /data/data/io.github.huskydg.magisk ] ; then pm install /system/etc/init/magisk/magisk.apk ; fi"
+    exec -- /system/bin/sh -c "if ! pm path --user 0 com.topjohnwu.magisk >/dev/null; then pm install {MAGISKSYSTEMDIR}/magisk.apk; fi"
    
 on property:init.svc.zygote=restarting
     exec u:r:su:s0 root root -- {MAGISKTMP}/magisk --auto-selinux --zygote-restart
@@ -79,6 +79,15 @@ on property:init.svc.zygote=stopped
                 shutil.copyfile(o_path, n_path)
                 run(["chmod", "+x", n_path])
         shutil.copyfile(self.dl_file_name, os.path.join(self.magisk_dir,"magisk.apk") )
+
+        # Bootless setup copies this stub into Magisk's runtime directory. At
+        # post-fs-data the daemon reads its trusted manager certificate from
+        # the stub's APK signature. Use the stub from the same APK as the
+        # manager so the daemon can authenticate the app when it first opens.
+        shutil.copyfile(
+            os.path.join(self.extract_to, "assets", "stub.apk"),
+            os.path.join(self.magisk_dir, "stub.apk"),
+        )
 
         # Updating Magisk from Magisk manager will modify bootanim.rc, 
         # So it is necessary to backup the original bootanim.rc.
